@@ -22,6 +22,7 @@ fs.readFile('./base/client_secret.json', function processClientSecrets(err, cont
     var credentials = JSON.parse(content);
     CLIENTSECRET = credentials.installed.client_secret;
     CLIENTID = credentials.installed.client_id;
+    // redirectUrl chua biet de lam gi
     var redirectUrl = credentials.installed.redirect_uris[0];
 });
 
@@ -223,15 +224,14 @@ function load_gmail_account(str) {
             console.log('Error reading content of token json');
         }
         var credential = JSON.parse(content);
-        var access_token = credential.access_token;
-
         // Check expiry date of the access token,
-        // if it is expired, we need to send ajax request to get a new one
-        if (credential.expiry_date > new Date().getTime()) {
-
+        // if it is expired, we need to send AJAX request to get a new one
+        if (credential.expiry_date < new Date().getTime()) {
+          console.log('Token expired. Now get new access token');
+          get_new_access_token(credential.refresh_token, encryptor(str, false), gmail_labels_list);
+        } else {
+          gmail_labels_list(encryptor(str, false), credential.access_token);
         }
-
-        gmail_labels_list(encryptor(str, false), access_token);
     })
 }
 
@@ -259,16 +259,16 @@ function write_new_entry(str, callback) {
 
 }
 
-function get_new_access_token(userId, refresh_token) {
-  // to be continued
+function get_new_access_token(refresh_token, userId, callback) {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'https://www.googleapis.com/oauth2/v4/token', true);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhr.onload = function() {
-      // Lay duoc access_token thi bat dau goi cac Api ra
-      console.log(this.responseText);
-      console.log(JSON.parse(this.responseText).access_token);
-      var resume_access_token = JSON.parse(this.responseText).access_token;
+  xhr.onloadend = function() {
+      // Return new access token
+      if (this.status == 200) {
+        var access_token = JSON.parse(this.responseText).access_token;
+        callback(userId, access_token);
+      }
   };
   var param = 'client_id=' + CLIENTID + "&client_secret=" + CLIENTSECRET + "&refresh_token=" + refresh_token + "&grant_type=refresh_token";
   xhr.send(param);
