@@ -1,3 +1,4 @@
+// lon cmn
 var SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 function fnToken() {
 	var fs = require('fs');
