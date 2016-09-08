@@ -1,8 +1,8 @@
 var fs = require('fs');
 var readline = require('readline');
 var google = require('googleapis');
-var googleAuth = require('google-auth-library');
-var gmail = google.gmail('v1');
+// var googleAuth = require('google-auth-library');
+// var gmail = google.gmail('v1');
 
 
 // If modifying these scopes, delete your previously saved credentials
