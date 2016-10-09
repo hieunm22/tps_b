@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<link type="text/css" rel="stylesheet" href="stylesheet.css">
-<!-- <script src="jquery.min.js"></script> -->
+<link type="text/css" rel="stylesheet" href="style/stylesheet.css">
+<link type="text/css" rel="stylesheet" href="style/photon/css/photon.css">
+
 <script>
-    window.$ = window.jQuery = require('./jquery.min.js');
+    window.$ = require('jquery');
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="script_gg_b.js"></script>
+<script src="src/script_gg.js"></script>
+<script src="src/script_tg.js"></script>
+<script src="src/script_html.js"></script>
+
+
 
 <head>
     <meta charset="utf-8">
@@ -14,12 +19,15 @@
 </head>
 
 <body>
-    <div id="left-container">
+    <div id="left-container" data-spname="" data-accountname="">
         <p id="consol">.............</p>
         <button id="mailog" onclick="addNewAccount('gmail')">Login</button>
 
         <div id="content" style="text-align: left">
+          <nav class="nav-group" id="left-nav">
+            <h5 class="nav-group-title">Mail</h5>
 
+          </nav>
         </div>
     </div>
     <div id="rest-container">
@@ -43,38 +51,40 @@
 
 </body>
 
+<!-- Dont load the React too early, only when the DOM is ready -->
+<script src="app/bundle_react.js"></script>
 
 <script>
     // resize every godddamn thing
     $(document).ready(function() {
-        resizeAll()
-            // fnToken()
+      resizeAll()
     });
+
     $(window).resize(function() {
         resizeAll();
-        $('.tbUrl').text($('div#functional-container').width() + "x" + $('div#functional-container').height());
+        console.log($('div#functional-container').width() + "x" + $('div#functional-container').height());
     });
 
     function resizeAll() {
         $('div#left-container').height(window.innerHeight - 1);
-        $('div#rest-container').height(window.innerHeight - 1);
-        $('div#functional-container').width($('div#rest-container').width() - 150);
+        $('div#rest-container').height($('div#left-container').height());
+        $('div#functional-container').width($('div#rest-container').width() - $('div#rightbar-container').width()-10);
         $('div#functional-container').height($('div#rest-container').height());
 
 
         //resize form controls
         $('div#conversationdiv').width($('div#functional-container').width());
-        $('div#searchdiv').width($('div#functional-container').width());
-        $('div#chatboxdiv').width($('div#functional-container').width());
+        $('div#conversationdiv').height($('div#functional-container').height()-$('div#searchdiv').height()-$('div#chatboxdiv').height()-20);
+
+        $('div#searchdiv').width($('div#conversationdiv').width());
+        $('div#chatboxdiv').width($('div#conversationdiv').width());
+        $('textarea').width($('div#chatboxdiv').width()-60);
+        $('input#search-input').width($('div#searchdiv').width()-10);
+
     }
 
 
     // Authorize login to gmail
 </script>
-
-<script>
-    window.onload = loadExistingAccounts
-</script>
-
 
 </html>
