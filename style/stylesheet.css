@@ -71,11 +71,11 @@ body {
   left: 0px;
 }
 
-div#conversationdiv {
+#conversationdiv {
   position: relative;
   min-height: 330px;
-  /* background-color: #FF6F50; */
   overflow-y: auto;
+  /*background-color: #FF6F50;*/
   margin: 10px;
 }
 
