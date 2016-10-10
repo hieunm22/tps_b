@@ -19,9 +19,5 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "tingodb": "^0.4.2"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-preset-react": "^6.16.0"
   }
 }
