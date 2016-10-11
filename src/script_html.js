@@ -12,3 +12,10 @@ function changeacc(object){
   document.getElementById("left-container").setAttribute("data-spname", object.getAttribute("data-spname"));
   document.getElementById("left-container").setAttribute("data-accountname", object.getAttribute("data-accountname"));
 }
+
+function dateToDMY(date) {
+  var d = date.getDate();
+  var m = date.getMonth() + 1;
+  var y = date.getFullYear();
+  return '' +  (d <= 9 ? '0' + d : d) + '/' + (m<=9 ? '0' + m : m) + '/' + y;
+}

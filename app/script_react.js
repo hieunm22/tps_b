@@ -32,8 +32,8 @@ var EmailList = React.createClass({
         }
       });
     } else {
-      console.log('TO BE REPLACED WITH ACTION PER USER_HISTORY');
-      console.log('fetching new data at interval. Specify a query to filter mesage in Gmail list request')
+      // console.log('TO BE REPLACED WITH ACTION PER USER_HISTORY');
+      // console.log('fetching new data at interval. Specify a query to filter mesage in Gmail list request')
       var query = 'after:'+ this.state.data[0]['internalDate'].substring(0,10);
       M1.Fetching_new_message(ACTIVE_ACCOUNT, query, this);
     }
@@ -51,15 +51,20 @@ var EmailList = React.createClass({
 
   render: function() {
     var emailhead = this.state.data.map(function(message, i) {
-      var t = '';
       var head = message.payload.headers;
-      for (var i = 0; i < head.length; i++) {
+	  var headerText = '';
+	  var dateText = '';
+      for (i = 0; i < head.length; i++) {
         if (head[i].name == 'Subject') {
-          t = head[i]['value'];
-          break;
+          headerText = head[i]['value'];
+        }
+        else if (head[i].name == 'Date') {
+          dateText = head[i]['value'];
+		  dateText = new Date(dateText);
+		  dateText = dateToDMY(dateText);
         }
       }
-      return (<div><EmailHead emailtitle = {t} id={i}/></div>)
+      return (<EmailHead emailtitle = {headerText} emailtime={dateText}/>)
     });
 
     return (<div className = "emaillist" >{emailhead}</div>);
@@ -68,7 +73,7 @@ var EmailList = React.createClass({
 
 
 ReactDOM.render(
-  <EmailList pollInterval = {1000} />,
+  <EmailList pollInterval = {5000} />,
   document.getElementById('conversationdiv')
 );
 
@@ -76,9 +81,20 @@ ReactDOM.render(
 var EmailHead = React.createClass({
     render: function() {
         return (
-          <div className = 'emailhead' >
-            {this.props.emailtitle}
-          </div>
+          <div className = 'emailhead'>
+		    <p className='alignLeft'>{this.props.emailtitle}</p>
+			<p className='alignRight'>{this.props.emailtime}</p>
+		  </div>
+          // <div className = 'emailhead'>
+		    // <table className='fixTable'>
+			  // <tbody>
+			    // <tr>
+			      // <td className='alignLeft'>{this.props.emailtitle}</td>
+			      // <td className='alignRight'>{this.props.emailtime}</td>
+			    // </tr>
+			  // </tbody>
+		    // </table>
+		  // </div>
         );
     }
 });

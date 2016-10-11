@@ -56,7 +56,7 @@ body {
   text-indent: 10px;
   font-family: Arial;
   border-radius: 10px;
-  height: 20px;
+  height: 30px;
 }
 
 #chat-input {
@@ -83,11 +83,23 @@ body {
   border: 2px;
   border-style: solid;
   border-color: black;
-  height: 40px;
+  clear: both;
+  height: 30px;
   margin-bottom: 5px;
-  margin-right: 10px;
-  padding-left: 5px;
-  padding-bottom: 10px;
-  border-radius: 10px;
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  vertical-align: top;
   background-color: #FF6F50;
+}
+
+.alignLeft {
+  /* align: left; */
+  background-color: #FF6F50;
+}
+
+.alignRight {
+  text-align:right;
+  background-color: #FF6F50;
+  /* padding-right: 5px; */
 }
