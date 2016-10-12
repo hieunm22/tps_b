@@ -75,7 +75,7 @@ body {
   position: relative;
   min-height: 330px;
   overflow-y: auto;
-  /*background-color: #FF6F50;*/
+  /*background-color: #FFFFCC;*/
   margin: 10px;
 }
 
@@ -83,23 +83,25 @@ body {
   border: 2px;
   border-style: solid;
   border-color: black;
-  clear: both;
-  height: 30px;
+  /* clear: both; */
+  overflow: hidden;
+  height: auto;
   margin-bottom: 5px;
   margin-right: 5px;
   padding: 5px;
   border-radius: 5px;
   vertical-align: top;
-  background-color: #FF6F50;
+  background-color: #FFFFCC;
 }
 
 .alignLeft {
-  /* align: left; */
-  background-color: #FF6F50;
+  float: left;
+  background-color: #FFFFCC;
+  /* overflow: hidden; */
 }
 
 .alignRight {
-  text-align:right;
-  background-color: #FF6F50;
-  /* padding-right: 5px; */
+  float: right;
+  background-color: #FFFFCC;
+  /* overflow: hidden; */
 }

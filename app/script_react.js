@@ -53,18 +53,16 @@ var EmailList = React.createClass({
     var emailhead = this.state.data.map(function(message, i) {
       var head = message.payload.headers;
 	  var headerText = '';
-	  var dateText = '';
       for (i = 0; i < head.length; i++) {
         if (head[i].name == 'Subject') {
           headerText = head[i]['value'];
-        }
-        else if (head[i].name == 'Date') {
-          dateText = head[i]['value'];
-		  dateText = new Date(dateText);
-		  dateText = dateToDMY(dateText);
+		  break;
         }
       }
-      return (<EmailHead emailtitle = {headerText} emailtime={dateText}/>)
+	  var dateText = parseInt(message.internalDate);
+	  dateText = new Date(dateText);
+	  dateText = dateToDMY(dateText);
+      return (<EmailHead key={message.id} emailtitle = {headerText} emailtime={dateText}/>)
     });
 
     return (<div className = "emaillist" >{emailhead}</div>);
@@ -73,7 +71,7 @@ var EmailList = React.createClass({
 
 
 ReactDOM.render(
-  <EmailList pollInterval = {5000} />,
+  <EmailList pollInterval = {1000} />,
   document.getElementById('conversationdiv')
 );
 
@@ -82,19 +80,9 @@ var EmailHead = React.createClass({
     render: function() {
         return (
           <div className = 'emailhead'>
-		    <p className='alignLeft'>{this.props.emailtitle}</p>
-			<p className='alignRight'>{this.props.emailtime}</p>
+		    <span className='alignLeft'>{this.props.emailtitle}</span>
+			<span className='alignRight'>{this.props.emailtime}</span>
 		  </div>
-          // <div className = 'emailhead'>
-		    // <table className='fixTable'>
-			  // <tbody>
-			    // <tr>
-			      // <td className='alignLeft'>{this.props.emailtitle}</td>
-			      // <td className='alignRight'>{this.props.emailtime}</td>
-			    // </tr>
-			  // </tbody>
-		    // </table>
-		  // </div>
         );
     }
 });

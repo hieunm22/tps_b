@@ -11,8 +11,7 @@
 <script src="src/script_tg.js"></script>
 <script src="src/script_html.js"></script>
 
-
-
+<!-- Don't load the React too early, only when the DOM is ready -->
 <head>
     <meta charset="utf-8">
     <title>Document of Vu</title>
@@ -49,42 +48,7 @@
         </div>
     </div>
 
-</body>
-
-<!-- Dont load the React too early, only when the DOM is ready -->
 <script src="app/bundle_react.js"></script>
-
-<script>
-    // resize every godddamn thing
-    $(document).ready(function() {
-      resizeAll()
-    });
-
-    $(window).resize(function() {
-        resizeAll();
-        console.log($('div#functional-container').width() + "x" + $('div#functional-container').height());
-    });
-
-    function resizeAll() {
-        $('div#left-container').height(window.innerHeight - 1);
-        $('div#rest-container').height($('div#left-container').height());
-        $('div#functional-container').width($('div#rest-container').width() - $('div#rightbar-container').width()-10);
-        $('div#functional-container').height($('div#rest-container').height());
-
-
-        //resize form controls
-        $('div#conversationdiv').width($('div#functional-container').width());
-        $('div#conversationdiv').height($('div#functional-container').height()-$('div#searchdiv').height()-$('div#chatboxdiv').height()-20);
-
-        $('div#searchdiv').width($('div#conversationdiv').width());
-        $('div#chatboxdiv').width($('div#conversationdiv').width());
-        $('textarea').width($('div#chatboxdiv').width()-60);
-        $('input#search-input').width($('div#searchdiv').width()-10);
-
-    }
-
-
-    // Authorize login to gmail
-</script>
+</body>
 
 </html>
