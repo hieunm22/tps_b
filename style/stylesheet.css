@@ -75,7 +75,7 @@ body {
   position: relative;
   min-height: 330px;
   overflow-y: auto;
-  /*background-color: #FFFFCC;*/
+  /*background-color: #7646FF;*/
   margin: 10px;
 }
 
@@ -91,17 +91,18 @@ body {
   padding: 5px;
   border-radius: 5px;
   vertical-align: top;
-  background-color: #FFFFCC;
+   background-color: #7646FF;  /* FFFFCC */
+  color: white;
 }
 
 .alignLeft {
   float: left;
-  background-color: #FFFFCC;
+  background-color: #7646FF;
   /* overflow: hidden; */
 }
 
 .alignRight {
   float: right;
-  background-color: #FFFFCC;
+  background-color: #7646FF;
   /* overflow: hidden; */
 }
